@@ -1,0 +1,29 @@
+title: IoT Sensor Data Pipeline
+description: A comprehensive Streamlit-based application for collecting, processing, and analyzing IoT sensor data
+theme: minima
+markdown: kramdown
+highlighter: rouge
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+
+# Navigation
+header_pages:
+  - docs/developer-guide.md
+  - docs/architecture.md
+  - docs/data-format.md
+  - docs/api-reference.md
+
+# GitHub repository info
+github_username: your-username
+repository: iot-sensor-pipeline
+
+# Build settings
+exclude:
+  - "*.pyc"
+  - "__pycache__/"
+  - ".pytest_cache/"
+  - "venv/"
+  - "env/"
+  - ".streamlit/"
+  - "*.log"
