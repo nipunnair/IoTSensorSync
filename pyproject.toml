@@ -1,7 +1,7 @@
 [project]
-name = "repl-nix-workspace"
+name = "iot-sensor-pipeline"
 version = "0.1.0"
-description = "Add your description here"
+description = "IoT Sensor Data Collection & Processing Pipeline"
 requires-python = ">=3.11"
 dependencies = [
     "numpy>=2.2.6",
