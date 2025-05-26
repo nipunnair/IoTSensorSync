@@ -6,12 +6,19 @@ This guide provides complete instructions for setting up and running the IoT Sen
 
 ### System Requirements
 - **Operating System**: Windows 10+, macOS 10.14+, or Linux
-- **Python**: Version 3.11 or higher
 - **Memory**: Minimum 4GB RAM (8GB recommended)
-- **Storage**: 500MB free space
+- **Storage**: 1GB free space
 
-### Required Software
-- Python 3.11+ with pip
+### Required Software (Choose One)
+
+#### Option A: Docker (Recommended)
+- **Docker**: Version 20.0+
+- **Docker Compose**: Version 2.0+ (optional)
+- Web browser (Chrome, Firefox, Safari, or Edge)
+
+#### Option B: Local Python Development
+- **Python**: Version 3.11 or higher
+- **pip**: Package manager
 - Git (for cloning the repository)
 - Web browser (Chrome, Firefox, Safari, or Edge)
 
@@ -47,12 +54,53 @@ python -c "import streamlit, pandas, plotly, scipy, numpy; print('All dependenci
 
 ## 🏃‍♂️ Running the Application
 
-### Local Development
+### Option 1: Local Development (Python)
 ```bash
 streamlit run app.py --server.port 5000
 ```
 
-### Production Deployment
+### Option 2: Docker (Recommended)
+
+#### Quick Start with Docker
+```bash
+# Make script executable and run
+chmod +x docker-run.sh
+./docker-run.sh
+```
+
+#### Using Docker Compose
+```bash
+# Start the application
+docker-compose up -d
+
+# View logs
+docker-compose logs -f iot-sensor-dashboard
+
+# Stop the application
+docker-compose down
+```
+
+#### Manual Docker Commands
+```bash
+# Build the Docker image
+docker build -t iot-sensor-pipeline .
+
+# Run the container
+docker run -d \
+  --name iot-sensor-pipeline \
+  -p 5000:5000 \
+  -v $(pwd)/exports:/app/exports \
+  --restart unless-stopped \
+  iot-sensor-pipeline
+
+# View logs
+docker logs -f iot-sensor-pipeline
+
+# Stop the container
+docker stop iot-sensor-pipeline
+```
+
+### Option 3: Production Deployment
 ```bash
 streamlit run app.py --server.port 5000 --server.headless true
 ```
@@ -68,6 +116,19 @@ port = 5000
 [theme]
 base = "light"
 ```
+
+### Docker vs Local Development
+
+| Method | Pros | Cons | Best For |
+|--------|------|------|----------|
+| **Local Python** | Fast development cycle, easy debugging | Requires Python setup, environment conflicts | Development |
+| **Docker** | Consistent environment, easy deployment | Slower rebuild, requires Docker | Production, Sharing |
+| **Docker Compose** | Multi-service setup, production-like | More complex configuration | Integration testing |
+
+### Accessing the Application
+Once running, open your browser and navigate to:
+- **Local/Docker**: `http://localhost:5000`
+- **Production**: `http://your-server-ip:5000`
 
 ## 🔧 Development Environment
 
