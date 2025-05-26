@@ -7,7 +7,7 @@ WORKDIR /app
 # Set environment variables
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
-    STREAMLIT_SERVER_PORT=5000 \
+    STREAMLIT_SERVER_PORT=7001 \
     STREAMLIT_SERVER_ADDRESS=0.0.0.0 \
     STREAMLIT_SERVER_HEADLESS=true
 
@@ -30,11 +30,11 @@ COPY . .
 RUN mkdir -p .streamlit
 
 # Expose port
-EXPOSE 5000
+EXPOSE 7001
 
 # Health check
 HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
-    CMD curl -f http://localhost:5000/_stcore/health || exit 1
+    CMD curl -f http://localhost:7001/_stcore/health || exit 1
 
 # Run the application
-CMD ["streamlit", "run", "app.py", "--server.port=5000", "--server.address=0.0.0.0", "--server.headless=true"]
+CMD ["streamlit", "run", "app.py", "--server.port=7001", "--server.address=0.0.0.0", "--server.headless=true"]
